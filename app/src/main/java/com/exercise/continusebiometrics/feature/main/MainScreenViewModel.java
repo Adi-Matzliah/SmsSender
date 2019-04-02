@@ -83,10 +83,8 @@ public class MainScreenViewModel extends ViewModel {
         disposable.add(storageRepository.loadAllEvents(orderByField, order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(events -> {
-                    eventList.setValue(events);
-                    Log.e(TAG, String.valueOf(events.get(0).getId()));
-                        },
+                .subscribe(
+                        events -> eventList.setValue(events),
                         error -> Log.e(TAG, "Error occurred while trying to fetch events from DB!")
                 )
         );
